@@ -11,6 +11,7 @@ import {
 import StatCard from '@/components/dashboard/StatCard';
 import TopSellingCategories from '@/components/dashboard/TopSellingCategories';
 import TopBuyingVendors from '@/components/dashboard/TopBuyingVendors';
+import ReportsTable from '@/components/dashboard/ReportsTable';
 
 const Dashboard = () => {
   return (
@@ -88,6 +89,7 @@ const Dashboard = () => {
         <TopSellingCategories />
         <TopBuyingVendors />
       </div>
+        <ReportsTable />
     </div>
   );
 };
