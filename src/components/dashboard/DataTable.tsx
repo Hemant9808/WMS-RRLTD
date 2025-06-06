@@ -276,15 +276,15 @@
 
 
 import React, { useState, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+// import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuTrigger,
+// } from '@/components/ui/dropdown-menu';
 import { Checkbox } from '@/components/ui/checkbox';
 
 export interface TableColumn {
@@ -316,12 +316,12 @@ const DataTable: React.FC<DataTableProps> = ({
   data,
   itemsPerPage = 10,
   showPagination = true,
-  onRowAction,
-  rowActions = [
-    { label: 'View Details', value: 'view' },
-    { label: 'Edit', value: 'edit' },
-    { label: 'Delete', value: 'delete' },
-  ],
+//   onRowAction,
+//   rowActions = [
+//     { label: 'View Details', value: 'view' },
+//     { label: 'Edit', value: 'edit' },
+//     { label: 'Delete', value: 'delete' },
+//   ],
   selectable = false,
   onSelectionChange,
 }) => {
@@ -416,9 +416,9 @@ const DataTable: React.FC<DataTableProps> = ({
   const isAllSelected = 
     paginatedData.length > 0 && 
     selectedRows.length === paginatedData.length;
-  const isIndeterminate = 
-    selectedRows.length > 0 && 
-    selectedRows.length < paginatedData.length;
+//   const isIndeterminate = 
+//     selectedRows.length > 0 && 
+//     selectedRows.length < paginatedData.length;
 
   return (
     <div className="w-full">

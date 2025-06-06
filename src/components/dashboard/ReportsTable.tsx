@@ -214,7 +214,7 @@
 
 
 
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import DataTable, { TableColumn, TableRow } from './DataTable';
@@ -439,6 +439,7 @@ const columns: TableColumn[] = [
 
 const ReportsTable = () => {
   const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]);
+  console.log(selectedRows)
 
   const handleSelectionChange = (selectedIds: (string | number)[]) => {
     setSelectedRows(selectedIds);
