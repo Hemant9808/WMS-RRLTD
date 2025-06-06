@@ -38,7 +38,7 @@ function App() {
         </Route>
         <Route
           path="/"
-          // element={<Navigate to={isAuthenticated ? "/dashboard" : "/auth"} />}
+          element={<Navigate to={isAuthenticated ? "/dashboard" : "/auth"} />}
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
