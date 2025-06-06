@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -26,7 +25,7 @@ type VerifyCodeFormValues = z.infer<typeof verifyCodeSchema>;
 
 const VerifyCodeForm = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { loading } = useAppSelector((state) => state.auth) || false;
   const { email } = useAppSelector((state) => state.ui) || {};
 

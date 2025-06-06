@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { HammerIcon as HangerIcon } from 'lucide-react';
+// import { HammerIcon as HangerIcon } from 'lucide-react';
 import loginPageImage from '@/assets/loginPageImage.png';
 import logo from '@/assets/logo.png';
 interface AuthLayoutProps {

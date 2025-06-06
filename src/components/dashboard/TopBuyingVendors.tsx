@@ -8,7 +8,8 @@ import {
   CartesianGrid,
 } from 'recharts';
 
-const data = Array.from({ length: 9 }, (_, i) => ({
+const data = Array.from({ length: 9 }, (_) => ({
+  
   name: `GD-Food-Supplier`,
   value: Math.floor(Math.random() * 40 + 10),
 }));

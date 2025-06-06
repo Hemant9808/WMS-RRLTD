@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import AuthPage from './pages/auth/AuthPage';
 import Dashboard from './pages/dashboard/Dashboard';
 import DashboardLayout from './layouts/DashboardLayout';
-import ProtectedRoute from './components/auth/ProtectedRoute';
+// import ProtectedRoute from './components/auth/ProtectedRoute';
 
 function App() {
   const dispatch = useAppDispatch();
