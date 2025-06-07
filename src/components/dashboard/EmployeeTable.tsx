@@ -1,15 +1,4 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Search, Download, Upload, Filter, MoreHorizontal, X } from 'lucide-react';
-import DataTable, { TableColumn, TableRow } from './DataTable';
-import AddEmployeeModal from '../employee/AddEmployeeModel'
-import ImportProductsModal from '../employee/ImportProductModel';
-import RoleConfirmModal from '../employee/RoleConfirmModel';
-// Sample employee data matching the design
+
 const employeeData: TableRow[] = [
   {
     id: 1,
@@ -217,21 +206,40 @@ const columns: TableColumn[] = [
   }
 ];
 
+
+
+
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Search, Download, Upload, Filter, MoreHorizontal, X, ChevronUp, ChevronDown } from 'lucide-react';
+import DataTable, { TableColumn, TableRow } from './DataTable';
+import AddEmployeeModal from '../employee/AddEmployeeModel'
+import ImportProductsModal from '../employee/ImportProductModel';
+import RoleConfirmModal from '../employee/RoleConfirmModel';
+
 const EmployeeTable = () => {
-  const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]);
+ const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [employeeFilter, setEmployeeFilter] = useState('All');
   const [designationFilter, setDesignationFilter] = useState('All');
   const [roleFilter, setRoleFilter] = useState('All');
   const [statusFilter, setStatusFilter] = useState('Active');
   const [actionFilter, setActionFilter] = useState('');
-   const [showAddEmployee, setShowAddEmployee] = useState(false);
-   const [showImportProducts, setShowImportProducts] = useState(false);
-   const [roleConfirmModalOpen, setRoleConfirmModalOpen] = useState(false);
+  const [showAddEmployee, setShowAddEmployee] = useState(false);
+  const [showImportProducts, setShowImportProducts] = useState(false);
+  const [roleConfirmModalOpen, setRoleConfirmModalOpen] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+  
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  // const isTablet = useMediaQuery('(max-width: 1024px)');
+ console.log(selectedRows,actionFilter);
   const handleSelectionChange = (selectedIds: (string | number)[]) => {
     setSelectedRows(selectedIds);
   };
-  console.log('Selected Rows:', selectedRows,actionFilter);
 
   const clearFilters = () => {
     setSearchTerm('');
@@ -239,179 +247,256 @@ const EmployeeTable = () => {
     setDesignationFilter('All');
     setRoleFilter('All');
     setStatusFilter('Active');
-    setActionFilter('jwnfw');
+    setActionFilter('');
   };
 
-  // Filter data based on search and filters
-  const filteredData = employeeData.filter(employee => {
+    const filteredData = employeeData.filter(employee => {
     const matchesSearch = employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          employee.email.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'Active' || employee.status === statusFilter;
+    const matchesStatus = statusFilter === 'All' || employee.status === statusFilter;
+    const matchesDesignation = designationFilter === 'All' || employee.designation === designationFilter;
+    const matchesRole = roleFilter === 'All' || employee.role === roleFilter;
     
-    return matchesSearch && matchesStatus;
+    return matchesSearch && matchesStatus && matchesDesignation && matchesRole;
   });
 
   return (
-    <div className="space-y-6 overflow-x-hidden bg-white border border-gray-200 p-6 rounded-lg">
+
+
+
+
+
+ <div className="space-y-6 bg-white border border-gray-200 p-4 md:p-6 rounded-lg">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Employee</h1>
+          <h1 className="text-xl md:text-2xl font-semibold text-gray-900">Employee</h1>
           <p className="text-sm text-gray-500 mt-1">View and manage employee</p>
         </div>
-       <Button 
-            className="bg-[#7ba83c] hover:bg-[#6c973a] text-white"
-            onClick={() => 
-              setShowAddEmployee(true)
-            }
-          >
-            + Add Employee
-          </Button>
+        <Button 
+          className="bg-[#7ba83c] hover:bg-[#6c973a] text-white w-full md:w-auto"
+          onClick={() => setShowAddEmployee(true)}
+        >
+          + Add Employee
+        </Button>
       </div>
 
-      <div className="space-y-7 border border-gray-200 p-4 rounded-lg">
+      <div className="space-y-4 border border-gray-200 p-3 md:p-4 rounded-lg">
+        {/* Search and Filter Controls */}
+        <div className="flex flex-col gap-4">
+          {/* Main Search and Filter Bar */}
+          <div className="flex flex-col md:flex-row gap-3">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Input
+                placeholder="Search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 h-9 w-full"
+              />
+            </div>
 
-      {/* Filters and Search */}
-      <div className="bg-white rounded-lg  border-gray-200 ">
-        <div className="flex flex-wrap items-center gap-4">
-          {/* Search */}
-          <div className="relative flex-1 max-w-[8rem]">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <Input
-              placeholder="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 h-9"
-            />
+            {!isMobile && (
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={clearFilters}
+                  className="h-9 px-3 text-sm text-gray-500"
+                >
+                  Clear
+                  <X className="h-4 w-4 ml-1" />
+                </Button>
+
+                <div className="hidden md:flex items-center gap-2 ml-auto">
+                  <Button 
+                    onClick={() => setShowImportProducts(true)} 
+                    variant="outline" 
+                    size="sm" 
+                    className="h-9 px-3 text-sm text-gray-500"
+                  >
+                    <Download className="h-4 w-4 mr-1" />
+                    Import
+                  </Button>
+                  <Button variant="outline" size="sm" className="h-9 px-3 text-sm text-gray-500">
+                    <Upload className="h-4 w-4 mr-1" />
+                    Export
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {isMobile && (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="h-9 px-3 text-sm bg-[#7ba83c] text-white hover:bg-[#6c973a] flex items-center gap-1"
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                <Filter className="h-4 w-4" />
+                {showFilters ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+              </Button>
+            )}
           </div>
 
-          {/* Employee Filter */}
-          <div className="flex items-center gap-2 border rounded-lg p-1.5 px-3">
-            <span className="text-sm text-gray-500">Employee</span>
-            <Select value={employeeFilter} onValueChange={setEmployeeFilter}>
-               <SelectTrigger className="max-w-25 object-cover h-7 text-sm text-gray-500">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="All">All</SelectItem>
-                <SelectItem value="Active">Active</SelectItem>
-                <SelectItem value="Inactive">Inactive</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          {/* Additional Filters - shown on desktop or when expanded on mobile */}
+          {(showFilters || !isMobile) && (
+            <div className="grid grid-cols-2 md:flex md:flex-wrap items-center gap-2 md:gap-4">
+              {/* Employee Filter */}
+              <div className="flex items-center gap-2  flex-col md:flex-row text-left   border rounded-lg p-1.5 px-3">
+                <span className="text-sm text-gray-500 ">Employee</span>
+                <Select value={employeeFilter} onValueChange={setEmployeeFilter}>
+                  <SelectTrigger className="w-full md:w-24 h-7 text-sm text-gray-500">
+                    <SelectValue placeholder="Employee" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="All">All</SelectItem>
+                    <SelectItem value="Active">Active</SelectItem>
+                    <SelectItem value="Inactive">Inactive</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          {/* Designation Filter */}
-          <div className="flex items-center gap-2 border rounded-lg p-1.5 px-3">
-            <span className="text-sm text-gray-500">Designation</span>
-            <Select  value={designationFilter} onValueChange={setDesignationFilter}>
-               <SelectTrigger className="max-w-25 object-cover h-7 text-sm text-gray-500">
-                <SelectValue className="text-gray-500" />
-              </SelectTrigger>
-              <SelectContent className="text-gray-500">
-                <SelectItem className="text-gray-500" value="All">All</SelectItem>
-                <SelectItem value="Manager">Manager</SelectItem>
-                <SelectItem value="Supervisor">Supervisor</SelectItem>
-                <SelectItem value="Store Keeper">Store Keeper</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+              {/* Designation Filter */}
+              <div className="flex items-center gap-2 border rounded-lg p-1.5 px-3">
+                <span className="text-sm text-gray-500 hidden md:inline">Designation</span>
+                <Select value={designationFilter} onValueChange={setDesignationFilter}>
+                  <SelectTrigger className="w-full md:w-28 h-7 text-sm text-gray-500">
+                    <SelectValue placeholder="Designation" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="All">All</SelectItem>
+                    <SelectItem value="Manager">Manager</SelectItem>
+                    <SelectItem value="Supervisor">Supervisor</SelectItem>
+                    <SelectItem value="Store Keeper">Store Keeper</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          {/* Role Filter */}
-          <div className="flex items-center gap-2 border rounded-lg p-1.5 px-3 ">
-            <span className="text-sm text-gray-500">Role</span>
-            <Select value={roleFilter} onValueChange={setRoleFilter}>
-              <SelectTrigger className="max-w-25 object-cover h-7 text-sm text-gray-500">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="All">All</SelectItem>
-                <SelectItem value="Admin">Admin</SelectItem>
-                <SelectItem value="Manager">Manager</SelectItem>
-                <SelectItem value="Employee">Employee</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+              {/* Role Filter */}
+              <div className="flex items-center gap-2 border rounded-lg p-1.5 px-3">
+                <span className="text-sm text-gray-500 hidden md:inline">Role</span>
+                <Select value={roleFilter} onValueChange={setRoleFilter}>
+                  <SelectTrigger className="w-full md:w-24 h-7 text-sm text-gray-500">
+                    <SelectValue placeholder="Role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="All">All</SelectItem>
+                    <SelectItem value="Admin">Admin</SelectItem>
+                    <SelectItem value="Manager">Manager</SelectItem>
+                    <SelectItem value="Employee">Employee</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          {/* Status Filter */}
-          <div className="flex items-center gap-2 border rounded-lg p-1.5 px-3 ">
-            <span className="text-sm text-gray-500">Status</span>
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
-               <SelectTrigger className="max-w-25 object-cover h-7 text-sm text-gray-500">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {/* <SelectItem valu="All">All</SelectItem> */}
-                <SelectItem className='flex items-center ' value="Active">
-                    {/* <div className='w-2 h-2 bg-red-400 rounded-full'></div> */}
-                     Active</SelectItem>
-                <SelectItem value="Inactive">Inactive</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+              {/* Status Filter */}
+              <div className="flex items-center gap-2 border rounded-lg p-1.5 px-3">
+                <span className="text-sm text-gray-500 hidden md:inline">Status</span>
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger className="w-full md:w-24 h-7 text-sm text-gray-500">
+                    <SelectValue placeholder="Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="All">All</SelectItem>
+                    <SelectItem value="Active">Active</SelectItem>
+                    <SelectItem value="Inactive">Inactive</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          {/* Action Filter */}
-         
+              {isMobile && (
+                <div className="col-span-2 flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={clearFilters}
+                    className="h-9 px-3 text-sm text-gray-500"
+                  >
+                    Clear
+                    <X className="h-4 w-4 ml-1" />
+                  </Button>
 
-          {/* Clear Filters */}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={clearFilters}
-            className="h-9 px-3 text-sm text-gray-500"
-          >
-            Clear
-                        <X className="h-4 w-4 mr-1" />
+                  <Button 
+                    onClick={() => setShowImportProducts(true)} 
+                    variant="outline" 
+                    size="sm" 
+                    className="h-9 px-3 text-sm text-gray-500 flex-1"
+                  >
+                    <Download className="h-4 w-4 mr-1" />
+                    Import
+                  </Button>
+                  <Button variant="outline" size="sm" className="h-9 px-3 text-sm text-gray-500 flex-1">
+                    <Upload className="h-4 w-4 mr-1" />
+                    Export
+                  </Button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
-          </Button>
-
-          {/* Import/Export */}
-          <div className="flex items-center gap-2 ml-auto">
-            <Button onClick={()=>setShowImportProducts(true)} variant="outline" size="sm" className="h-9 px-3 text-sm text-gray-500">
-              <Download className="h-4 w-4 mr-1" />
-              Import
-            </Button>
-            <Button variant="outline" size="sm" className="h-9 px-3 text-sm text-gray-500">
-              <Upload className="h-4 w-4 mr-1" />
-              Export
-            </Button>
-            <Button variant="outline" size="sm" className="h-9 px-3 text-sm bg-[#7ba83c] text-white hover:bg-[#6c973a]">
-              <Filter className="h-4 w-4" />
-            </Button>
-          </div>
+        {/* Data Table */}
+        <div className="bg-white rounded-lg border border-gray-200 overflow-x-auto">
+          <DataTable
+            columns={columns}
+            data={filteredData}
+            itemsPerPage={10}
+            selectable={true}
+            onSelectionChange={handleSelectionChange}
+            // responsive={isMobile || isTablet}
+          />
         </div>
       </div>
 
+      {/* Modals */}
+      {showAddEmployee && (
+        <div 
+          className={`
+    fixed inset-0 md:inset-auto md:absolute md:rounded-lg
+    md:max-h-[95%] md:top-0 md:right-0 bg-white z-50 shadow-lg p-4
+    w-full md:w-[30rem] md:m-4
+    overflow-y-auto custom-scrollbar
+  `}
+        // className={`fixed inset-0 md:inset-auto md:absolute md:rounded-lg md:max-h-[95%] md:overflow-y-auto md:top-0 md:right-0 bg-white z-50 shadow-lg p-4 w-full md:w-[30rem] md:m-4`}
+        >
+          <AddEmployeeModal
+            open={showAddEmployee}
+            onOpenChange={setShowAddEmployee}
+          />
+        </div>
+      )}
       
-      <div className="bg-white rounded-lg border border-gray-200">
-        <DataTable
-          columns={columns}
-          data={filteredData}
-          itemsPerPage={10}
-          selectable={true}
-          onSelectionChange={handleSelectionChange}
-        />
-      </div>
-      </div>
-     {showAddEmployee &&
-     <div className='absolute rounded-lg max-h-[95%] overflow-y-scroll   top-0 right-0 bg-white z-50 shadow-lg p-4 w-[30rem]'>
-      <AddEmployeeModal
-        open={showAddEmployee}
-        onOpenChange={setShowAddEmployee}
-      />
-     </div>
-     
-      
-      }
-       <ImportProductsModal
+      <ImportProductsModal
         open={showImportProducts}
         onOpenChange={setShowImportProducts}
       />
+      
       <RoleConfirmModal
-      open={roleConfirmModalOpen}
-      onOpenChange={setRoleConfirmModalOpen}
+        open={roleConfirmModalOpen}
+        onOpenChange={setRoleConfirmModalOpen}
       />
     </div>
   );
 };
 
 export default EmployeeTable;
+
+// Add this hook to your hooks folder (if you don't have it already)
+// hooks/use-media-query.ts
+import { useState, useEffect } from 'react';
+
+export function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => setMatches(media.matches);
+    media.addListener(listener);
+    return () => media.removeListener(listener);
+  }, [matches, query]);
+
+  return matches;
+}

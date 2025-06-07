@@ -81,7 +81,7 @@ const AddEmployeeModal = ({ open, onOpenChange }: AddEmployeeModalProps) => {
     <div>
       {/* <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent className="max-w-md mx-auto max-h-[90vh] overflow-y-auto"> */}
-          <div className="flex text-gray-500 flex-row items-center justify-between space-y-0 pb-4">
+          <div className="flex overflow-scroll text-gray-500 flex-row items-center justify-between space-y-0 pb-4">
             <div className="text-lg font-medium">Add Employee</div>
             <Button
               variant="ghost"
