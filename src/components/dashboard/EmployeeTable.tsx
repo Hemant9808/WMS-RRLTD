@@ -286,7 +286,8 @@ const EmployeeTable = () => {
         <div className="flex flex-col gap-4">
           {/* Main Search and Filter Bar */}
           <div className="flex flex-col md:flex-row gap-3">
-            <div className="relative flex-1">
+
+           {isMobile && <div className="relative flex-1 max-w-[100%]">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
                 placeholder="Search"
@@ -294,37 +295,7 @@ const EmployeeTable = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10 h-9 w-full"
               />
-            </div>
-
-            {!isMobile && (
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={clearFilters}
-                  className="h-9 px-3 text-sm text-gray-500"
-                >
-                  Clear
-                  <X className="h-4 w-4 ml-1" />
-                </Button>
-
-                <div className="hidden md:flex items-center gap-2 ml-auto">
-                  <Button 
-                    onClick={() => setShowImportProducts(true)} 
-                    variant="outline" 
-                    size="sm" 
-                    className="h-9 px-3 text-sm text-gray-500"
-                  >
-                    <Download className="h-4 w-4 mr-1" />
-                    Import
-                  </Button>
-                  <Button variant="outline" size="sm" className="h-9 px-3 text-sm text-gray-500">
-                    <Upload className="h-4 w-4 mr-1" />
-                    Export
-                  </Button>
-                </div>
-              </div>
-            )}
+            </div>}
 
             {isMobile && (
               <Button 
@@ -340,8 +311,21 @@ const EmployeeTable = () => {
           </div>
 
           {/* Additional Filters - shown on desktop or when expanded on mobile */}
-          {(showFilters || !isMobile) && (
-            <div className="grid grid-cols-2 md:flex md:flex-wrap items-center gap-2 md:gap-4">
+         
+            {(showFilters || !isMobile) && <div className="grid grid-cols-2  md:flex md:flex-wrap items-center gap-2 md:gap-4">
+              
+
+             {!isMobile && <div className="relative flex-1 max-w-[15rem]">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Input
+                placeholder="Search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 h-9 w-full"
+              />
+            </div>}
+
+
               {/* Employee Filter */}
               <div className="flex items-center gap-2  flex-col md:flex-row text-left   border rounded-lg p-1.5 px-3">
                 <span className="text-sm text-gray-500 ">Employee</span>
@@ -404,7 +388,7 @@ const EmployeeTable = () => {
                 </Select>
               </div>
 
-              {isMobile && (
+    
                 <div className="col-span-2 flex items-center gap-2">
                   <Button
                     variant="outline"
@@ -430,9 +414,9 @@ const EmployeeTable = () => {
                     Export
                   </Button>
                 </div>
-              )}
-            </div>
-          )}
+            
+            </div>}
+          
         </div>
 
         {/* Data Table */}
