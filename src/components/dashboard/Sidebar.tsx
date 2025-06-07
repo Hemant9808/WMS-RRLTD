@@ -99,7 +99,7 @@ import {
   Store,
   HelpCircle,
   Settings,
-  LogOut,
+  // LogOut,
   Menu,
   X,
 } from 'lucide-react';
