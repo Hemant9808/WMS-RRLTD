@@ -24,7 +24,7 @@ const Sidebar = () => {
   const location = useLocation();
   
   return (
-    <div className="flex h-screen w-64 flex-col  bg-[#F0F4F7]">
+    <div className="flex h-screen w-[14rem] flex-col  bg-[#F0F4F7]">
       <div className="p-6">
         {/* <Logo size={32} />
         img

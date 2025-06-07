@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
-import { login } from '@/redux/slices/authSlice';
+// import { login } from '@/redux/slices/authSlice';
 import { togglePasswordVisibility } from '@/redux/slices/uiSlice';
 
 import { Button } from '@/components/ui/button';
@@ -43,15 +43,16 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginFormValues) => {
-    dispatch(login(data))
-      .unwrap()
-      .then(() => {
+    console.log('Form submitted:', data);
+    // dispatch(login(data))
+      // .unwrap()
+      // .then(() => {
         navigate('/dashboard');
-      })
-      .catch(() => {
+      // })
+      // .catch(() => {
         // Error is handled by the auth slice
-      });
-  };
+      // });
+  };  
 
   const handleTogglePassword = () => {
     dispatch(togglePasswordVisibility());
