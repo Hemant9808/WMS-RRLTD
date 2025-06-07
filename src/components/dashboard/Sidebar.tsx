@@ -91,7 +91,7 @@
 
 
 
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import {
   LayoutDashboard,
@@ -122,7 +122,7 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
-
+ const navigate = useNavigate();
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -203,11 +203,12 @@ const Sidebar = () => {
             className="h-10 w-10 rounded-full object-cover"
           />
           <div className="flex-1">
-            <div className="text-sm font-medium">Jatin Tyagi</div>
+            <div className="text-sm flex w-[6rem] font-medium">Jatin Tyagi</div>
             <div className="text-xs text-gray-500">Manager</div>
           </div>
-          <button className="text-gray-400 hover:text-gray-600">
-            <LogOut className="h-5 w-5" />
+          <button onClick={()=>navigate('/auth/login')} className=" bg-green-600 text-xs text-white rounded-lg px-2 py-1 ">
+            Login
+            {/* <LogOut className="h-5 w-5" /> */}
           </button>
         </div>
       </div>
@@ -315,9 +316,10 @@ const Sidebar = () => {
                 <div className="text-xs text-gray-500">Manager</div>
               </div>
             )}
-            <button className="text-gray-400 hover:text-gray-600">
-              <LogOut className="h-5 w-5" />
-            </button>
+           <button onClick={()=>navigate('/auth/login')} className=" bg-green-600 text-xs text-white rounded-lg px-2 py-1 ">
+            Login
+            {/* <LogOut className="h-5 w-5" /> */}
+          </button>
           </div>
         </div>
       </div>

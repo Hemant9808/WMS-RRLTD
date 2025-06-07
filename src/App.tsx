@@ -8,6 +8,7 @@ import AuthPage from './pages/auth/AuthPage';
 import Dashboard from './pages/dashboard/Dashboard';
 import DashboardLayout from './layouts/DashboardLayout';
 import Employee from './pages/Employee/Employee';
+import UnderMaintenance from './components/ui/notFound';
 // import ProtectedRoute from './components/auth/ProtectedRoute';
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
       <Routes>
         <Route
           path="/auth/*"
-          element={isAuthenticated ? <Navigate to="/dashboard" /> : <AuthPage />}
+          element={<AuthPage />}
         />
         <Route
           path="/dashboard"
@@ -37,12 +38,16 @@ function App() {
         >
           <Route index element={<Dashboard />} />
            <Route path="employee" element={<Employee />} />
+            <Route path="notFound" element={<UnderMaintenance/>} />
         </Route>
         <Route
           path="/"
-          element={<Navigate to={isAuthenticated ? "/dashboard" : "/auth"} />}
+          element={<Navigate to={ "/auth/login" } />}
         />
-        <Route path="*" element={<Navigate to="/" />} />
+     
+
+
+        <Route path="*" element={<Navigate to="/dashboard/notFound" />} />
       </Routes>
       <Toaster position="top-right" richColors />
     </>
