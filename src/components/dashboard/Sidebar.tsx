@@ -97,6 +97,7 @@ import {
   LayoutDashboard,
   Users,
   Store,
+
   HelpCircle,
   Settings,
   // LogOut,
@@ -110,6 +111,9 @@ const mainNavItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
   { icon: Users, label: 'Employee', href: '/dashboard/employee' },
   { icon: Store, label: 'Vendor', href: '/dashboard/vendor' },
+  { icon: Store, label: 'Stock In', href: '/dashboard/stockIn' },
+  { icon: Store, label: 'Stock Out', href: '/dashboard/stockOut' },
+
 ];
 
 const bottomNavItems = [

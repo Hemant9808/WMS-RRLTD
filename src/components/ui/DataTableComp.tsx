@@ -33,7 +33,6 @@ interface DataTableProps {
   rowActions?: { label: string; value: string }[];
   selectable?: boolean;
   onSelectionChange?: (selectedIds: (string | number)[]) => void;
-  onRowClick?:any
 }
 
 const DataTable: React.FC<DataTableProps> = ({
@@ -41,7 +40,6 @@ const DataTable: React.FC<DataTableProps> = ({
   data,
   itemsPerPage = 10,
   showPagination = true,
-  onRowClick,
 //   onRowAction,
 //   rowActions = [
 //     { label: 'View Details', value: 'view' },
@@ -153,15 +151,7 @@ const DataTable: React.FC<DataTableProps> = ({
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>
-              {selectable && (
-                <th className="px-6 py-3 text-left w-12">
-                  <Checkbox
-                    checked={isAllSelected}
-                    onCheckedChange={toggleAllSelection}
-                    // indeterminate={isIndeterminate}
-                  />
-                </th>
-              )}
+             
               {columns.map((column) => (
                 <th
                   key={column.key}
@@ -183,21 +173,12 @@ const DataTable: React.FC<DataTableProps> = ({
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 bg-white">
+          <tbody className=" bg-white">
             {paginatedData.map((row) => (
               <tr key={row.id} className="hover:bg-gray-50">
-                {selectable && (
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <Checkbox
-                      checked={selectedRows.includes(row.id)}
-                      onCheckedChange={() => toggleRowSelection(row.id)}
-                    />
-                  </td>
-                )}
+                
                 {columns.map((column) => (
-                  <td
-                  onClick={onRowClick}
-                   key={column.key} className="px-6 cursor-pointer py-4 whitespace-nowrap">
+                  <td key={column.key} className="px-6 py-4 border-none whitespace-nowrap">
                     {column.render 
                       ? column.render(row) 
                       : <span className="text-gray-600 text-[0.8rem]">{row[column.key]}</span>

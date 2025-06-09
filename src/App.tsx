@@ -1,14 +1,17 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Toaster } from 'sonner';
-import { useAppDispatch, useAppSelector } from './hooks/useRedux';
-import { fetchCurrentUser } from './redux/slices/authSlice';
-import { useEffect } from 'react';
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from "sonner";
+import { useAppDispatch, useAppSelector } from "./hooks/useRedux";
+import { fetchCurrentUser } from "./redux/slices/authSlice";
+import { useEffect } from "react";
 
-import AuthPage from './pages/auth/AuthPage';
-import Dashboard from './pages/dashboard/Dashboard';
-import DashboardLayout from './layouts/DashboardLayout';
-import Employee from './pages/Employee/Employee';
-import UnderMaintenance from './components/ui/notFound';
+import AuthPage from "./pages/auth/AuthPage";
+import Dashboard from "./pages/dashboard/Dashboard";
+import DashboardLayout from "./layouts/DashboardLayout";
+import Employee from "./pages/Employee/Employee";
+import UnderMaintenance from "./components/ui/notFound";
+import VendorPage from "./pages/vendor/Vendor";
+import StockInPage from "./pages/vendor/Vendor";
+import VendorTabs from "./pages/vendor/VendorTabs";
 // import ProtectedRoute from './components/auth/ProtectedRoute';
 
 function App() {
@@ -24,28 +27,23 @@ function App() {
   return (
     <>
       <Routes>
-        <Route
-          path="/auth/*"
-          element={<AuthPage />}
-        />
+        <Route path="/auth/*" element={<AuthPage />} />
         <Route
           path="/dashboard"
           element={
             // <ProtectedRoute>
-              <DashboardLayout />
+            <DashboardLayout />
             // </ProtectedRoute>
           }
         >
           <Route index element={<Dashboard />} />
-           <Route path="employee" element={<Employee />} />
-            <Route path="notFound" element={<UnderMaintenance/>} />
+          <Route path="employee" element={<Employee />} />
+          <Route path="vendor" element={<VendorPage />} />
+          <Route path="vendorDetails" element={<VendorTabs />} />
+          <Route path="stockIn" element={<StockInPage />} />
+          <Route path="notFound" element={<UnderMaintenance />} />
         </Route>
-        <Route
-          path="/"
-          element={<Navigate to={ "/auth/login" } />}
-        />
-     
-
+        <Route path="/" element={<Navigate to={"/auth/login"} />} />
 
         <Route path="*" element={<Navigate to="/dashboard/notFound" />} />
       </Routes>
