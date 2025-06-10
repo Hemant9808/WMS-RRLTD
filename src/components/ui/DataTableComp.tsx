@@ -1,6 +1,6 @@
 
 import React, { useState, useCallback } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowDownUp, ChevronLeft, ChevronRight } from 'lucide-react';
 // import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 // import {
@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button';
 //   DropdownMenuItem,
 //   DropdownMenuTrigger,
 // } from '@/components/ui/dropdown-menu';
-import { Checkbox } from '@/components/ui/checkbox';
 
 export interface TableColumn {
   key: string;
@@ -46,15 +45,15 @@ const DataTable: React.FC<DataTableProps> = ({
 //     { label: 'Edit', value: 'edit' },
 //     { label: 'Delete', value: 'delete' },
 //   ],
-  selectable = false,
-  onSelectionChange,
+  // selectable = false,
+  // onSelectionChange,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: 'asc' | 'desc';
   } | null>(null);
-  const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]);
+  // const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]);
 
   // Sort data
   const sortedData = React.useMemo(() => {
@@ -91,30 +90,30 @@ const DataTable: React.FC<DataTableProps> = ({
     });
   }, []);
 
-  const toggleRowSelection = useCallback(
-    (id: string | number) => {
-      setSelectedRows((prev) => {
-        const newSelection = prev.includes(id)
-          ? prev.filter((rowId) => rowId !== id)
-          : [...prev, id];
+  // const toggleRowSelection = useCallback(
+  //   (id: string | number) => {
+  //     setSelectedRows((prev) => {
+  //       const newSelection = prev.includes(id)
+  //         ? prev.filter((rowId) => rowId !== id)
+  //         : [...prev, id];
         
-        onSelectionChange?.(newSelection);
-        return newSelection;
-      });
-    },
-    [onSelectionChange]
-  );
+  //       onSelectionChange?.(newSelection);
+  //       return newSelection;
+  //     });
+  //   },
+  //   [onSelectionChange]
+  // );
 
-  const toggleAllSelection = useCallback(() => {
-    if (selectedRows.length === paginatedData.length) {
-      onSelectionChange?.([]);
-      setSelectedRows([]);
-    } else {
-      const allIds = paginatedData.map((row) => row.id);
-      onSelectionChange?.(allIds);
-      setSelectedRows(allIds);
-    }
-  }, [paginatedData, selectedRows, onSelectionChange]);
+  // const toggleAllSelection = useCallback(() => {
+  //   if (selectedRows.length === paginatedData.length) {
+  //     onSelectionChange?.([]);
+  //     setSelectedRows([]);
+  //   } else {
+  //     const allIds = paginatedData.map((row) => row.id);
+  //     onSelectionChange?.(allIds);
+  //     setSelectedRows(allIds);
+  //   }
+  // }, [paginatedData, selectedRows, onSelectionChange]);
 
   const generatePageNumbers = useCallback(() => {
     const pages = [];
@@ -137,17 +136,17 @@ const DataTable: React.FC<DataTableProps> = ({
     return pages;
   }, [currentPage, totalPages]);
 
-  const isAllSelected = 
-    paginatedData.length > 0 && 
-    selectedRows.length === paginatedData.length;
+  // const isAllSelected = 
+  //   paginatedData.length > 0 && 
+  //   selectedRows.length === paginatedData.length;
 //   const isIndeterminate = 
 //     selectedRows.length > 0 && 
 //     selectedRows.length < paginatedData.length;
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       
-      <div className="overflow-x-scroll rounded-lg border border-gray-200 bg-white">
+      <div className="overflow-x-scroll lg:overflow-hidden rounded-xl border border-gray-200 bg-white">
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>
@@ -155,14 +154,14 @@ const DataTable: React.FC<DataTableProps> = ({
               {columns.map((column) => (
                 <th
                   key={column.key}
-                  className={`px-6 py-3 text-left text-[0.8rem] font-medium uppercase tracking-wider text-gray-500 ${
+                  className={`px-3 py-3 text-left text-[0.8rem] font-medium  tracking-wider text-gray-500 ${
                     column.sortable ? 'cursor-pointer hover:bg-gray-100' : ''
                   }`}
                   style={{ width: column.width }}
                   onClick={() => column.sortable && handleSort(column.key)}
                 >
-                  <div className="flex items-center gap-1">
-                    {column.label}
+                  <div className="flex text-xs font-semibold items-center gap-1">
+                   <p> {column.label}</p> {column.label != "Action" && <ArrowDownUp className='w-3 mr-1 font-semibold' />}
                     {column.sortable && sortConfig?.key === column.key && (
                       <span className="text-gray-400">
                         {sortConfig.direction === 'asc' ? '↑' : '↓'}
@@ -178,10 +177,10 @@ const DataTable: React.FC<DataTableProps> = ({
               <tr key={row.id} className="hover:bg-gray-50">
                 
                 {columns.map((column) => (
-                  <td key={column.key} className="px-6 py-4 border-none whitespace-nowrap">
+                  <td key={column.key} className="px-3 py-4 border-none whitespace-nowrap">
                     {column.render 
                       ? column.render(row) 
-                      : <span className="text-gray-600 text-[0.8rem]">{row[column.key]}</span>
+                      : <span className="text-gray-500 text-xs font-medium">{row[column.key]}</span>
                     }
                   </td>
                 ))}

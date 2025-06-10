@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, MoreVertical } from "lucide-react";
+import { AlignJustify, BriefcaseBusiness, MoreHorizontal, MoreVertical, NotebookPen } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
-import VendorDetails from "@/components/vendor/vendorDetails";
+// import VendorDetails from "@/components/vendor/vendorDetails";
 // import VendorNotes from "@/components/vendor/vendorNotes";
 import {
   DropdownMenu,
@@ -27,29 +27,92 @@ import DataTable, {
   TableColumn,
   TableRow,
 } from "@/components/ui/DataTableComp";
+import StockInDetails from "@/components/stockIn/StockInDetails";
 
-const stockInColumns: TableColumn[] = [
-  { key: "orderNo", label: "Order No", sortable: true, width: "120px" },
-  { key: "productName", label: "Product Name", sortable: true, width: "150px" },
-  { key: "category", label: "Category", sortable: true, width: "150px" },
-  { key: "unitType", label: "Unit Type", sortable: true, width: "120px" },
-  { key: "arrivalDate", label: "Arrival Date", sortable: true, width: "150px" },
-  {
-    key: "expectedDate",
-    label: "Expected Date",
-    sortable: true,
-    width: "150px",
-  },
-  {
-    key: "deliveryDate",
-    label: "Delivery Date",
-    sortable: true,
-    width: "150px",
-  },
+// const stockInColumns: TableColumn[] = [
+//   { key: "orderNo", label: "Order No", sortable: true, width: "120px" },
+//   { key: "productName", label: "Product Name", sortable: true, width: "150px" },
+//   { key: "category", label: "Category", sortable: true, width: "150px" },
+//   { key: "unitType", label: "Unit Type", sortable: true, width: "120px" },
+//   { key: "arrivalDate", label: "Arrival Date", sortable: true, width: "150px" },
+//   {
+//     key: "expectedDate",
+//     label: "Expected Date",
+//     sortable: true,
+//     width: "150px",
+//   },
+//   {
+//     key: "deliveryDate",
+//     label: "Delivery Date",
+//     sortable: true,
+//     width: "150px",
+//   },
+//   {
+//     key: "action",
+//     label: "Action",
+//     width: "80px",
+//     render: (row: any) => (
+//       <DropdownMenu>
+//         <DropdownMenuTrigger asChild>
+//           <Button variant="ghost" className="h-8 w-8 p-0">
+//             <MoreVertical className="h-4 w-4" />
+//           </Button>
+//         </DropdownMenuTrigger>
+//         <DropdownMenuContent
+//           align="end"
+//           className="bg-white shadow-lg p-2 cursor-pointer"
+//         >
+//           <DropdownMenuItem onClick={() => console.log("view", row)}>
+//             View
+//           </DropdownMenuItem>
+//           <DropdownMenuItem onClick={() => console.log("edit", row)}>
+//             Edit
+//           </DropdownMenuItem>
+//           <DropdownMenuItem onClick={() => console.log("delete", row)}>
+//             Delete
+//           </DropdownMenuItem>
+//         </DropdownMenuContent>
+//       </DropdownMenu>
+//     ),
+//   },
+// ];
+
+// const stockInData: TableRow[] = [
+//   {
+//     id: 1,
+//     orderNo: "1456",
+//     productName: "--",
+//     category: "--",
+//     unitType: "--",
+//     arrivalDate: "--",
+//     expectedDate: "--",
+//     deliveryDate: "--",
+//   },
+//   {
+//     id: 2,
+//     orderNo: "14552",
+//     productName: "--",
+//     category: "--",
+//     unitType: "--",
+//     arrivalDate: "--",
+//     expectedDate: "--",
+//     deliveryDate: "--",
+//   },
+// ];
+
+
+
+const stockAdjustmentColumns: TableColumn[] = [
+  { key: "dateTime", label: "Date & Time", sortable: true },
+  { key: "adjustedBy", label: "Adjusted By", sortable: true },
+  { key: "previousStock", label: "Previous Stock", sortable: true },
+  { key: "adjustmentQty", label: "Adjustment Qtys", sortable: true },
+  { key: "newStock", label: "New Stock", sortable: true },
+  { key: "reason", label: "Reason", sortable: true },
+  { key: "note", label: "Note", sortable: true },
   {
     key: "action",
     label: "Action",
-    width: "80px",
     render: (row: any) => (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -76,28 +139,32 @@ const stockInColumns: TableColumn[] = [
   },
 ];
 
-const stockInData: TableRow[] = [
+
+const stockAdjustmentData: TableRow[] = [
   {
     id: 1,
-    orderNo: "1456",
-    productName: "--",
-    category: "--",
-    unitType: "--",
-    arrivalDate: "--",
-    expectedDate: "--",
-    deliveryDate: "--",
+    dateTime: "2/1/2025, 13:00pm",
+    adjustedBy: "--",
+    previousStock: "--",
+    adjustmentQty: "--",
+    newStock: "--",
+    reason: "--",
+    note: "--",
   },
   {
     id: 2,
-    orderNo: "14552",
-    productName: "--",
-    category: "--",
-    unitType: "--",
-    arrivalDate: "--",
-    expectedDate: "--",
-    deliveryDate: "--",
+    dateTime: "2/1/2025, 13:00pm",
+    adjustedBy: "--",
+    previousStock: "--",
+    adjustmentQty: "--",
+    newStock: "--",
+    reason: "--",
+    note: "--",
   },
 ];
+
+
+
 
 export const noteData: TableRow[] = [
   {
@@ -163,7 +230,7 @@ export const noteColumns: TableColumn[] = [
     ),
   },
 ]
-const VendorTabs = () => {
+const StockOutTabs = () => {
   const [activeTab, setActiveTab] = useState("vendor-details");
 
   const [open, setOpen] = useState(false)
@@ -176,12 +243,12 @@ const VendorTabs = () => {
     }
 
   return (
-    <div className="flex-1 space-y-6 px-4 bg-white overflow-hidden mt-5 rounded-xl h-[95%]">
+    <div className="flex-1 p-4 space-y-4  bg-white overflow-hidden mt-5 rounded-xl lg:h-[95%]">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Vendor</h1>
-          <p className="text-sm text-gray-500 mt-1">View and manage Vendor</p>
+          <h1 className="text-2xl font-semibold text-gray-600">Stock In</h1>
+          <p className="text-xs font-semibold text-gray-500 mt-1">View Order and  Vendor Details</p>
         </div>
        {activeTab=="notes" && <Button
         onClick={()=>setOpen(true)}
@@ -195,102 +262,40 @@ const VendorTabs = () => {
         </Button>}
       </div>
 
-      {/* Vendor Profile Section */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
+      
+      <div className="bg-white  ">
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Left Side - Profile */}
 
-          {activeTab === "vendor-details" && (
-            <div className="w-full max-w-sm rounded-3xl border border-gray-200 bg-white shadow-sm p-4">
-              {/* Profile Image and Status */}
-              <div className="flex flex-col items-center gap-4">
-                <div className="relative ">
-                  <img
-                    src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1"
-                    alt="Janet Daniel"
-                    className="w-[10rem] h-[10rem]  rounded-full object-cover border-4 border-white shadow"
-                  />
-                </div>
-                <span className=" bg-green-100 text-green-600 font-semibold text-xs  px-4 py-2 rounded-lg shadow-sm">
-                  Active
-                </span>
-
-                <h3 className=" text-base font-semibold text-gray-800">
-                  Janet Daniel
-                </h3>
-              </div>
-
-              {/* Visitor Info Section */}
-              <div className="mt-6">
-                <div className="bg-gray-50 px-4 py-2 mb-4 rounded-t-md border-t border-gray-200 text-md font-medium text-gray-600">
-                  Visitor Information
-                </div>
-                <div className="bg-white px-4 py-3 rounded-b-md space-y-3 text-sm">
-                  <div className="flex  text-left text-gray-600">
-                    <span className="font-medium flex-1">Company Name</span>
-                    <span className="text-gray-600 flex-1 ">Nike</span>
-                  </div>
-                  <div className="flex  text-left text-gray-600">
-                    <span className="font-medium flex-1">Contact</span>
-                    <span className="text-gray-600 flex-1">9876543210</span>
-                  </div>
-                  <div className="flex  text-left text-gray-600">
-                    <span className="font-medium flex-1">Email</span>
-                    <span className="text-gray-600 flex-1">
-                      abc123@gmail.com
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+      
 
           {/* Right Side - Tabs */}
           <div className="flex-1">
             <Tabs
               value={activeTab}
               onValueChange={setActiveTab}
-              className="w-full"
+              className="w-full "
             >
-              <div className="flex items-center justify-between mb-6">
-                {/* <TabsList className="grid w-auto grid-cols-3 bg-gray-100">
-                  <TabsTrigger 
-                    value="vendor-details" 
-                    className="data-[state=active]:bg-white data-[state=active]:text-green-900"
-                  >
-                    Vendor Details
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="notes" 
-                    className="data-[state=active]:bg-white data-[state=active]:text-gray-600 data-[state=active]:underline-green-600 "
-                  >
-                    Notes
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="stock-in" 
-                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900"
-                  >
-                    Stock In
-                  </TabsTrigger>
-                </TabsList> */}
-                <TabsList className="flex space-x-6 border-b border-gray-200 bg-transparent px-4">
+              <div className="flex bg--400 border-b mb-5 items-center justify-between ">
+               
+                <TabsList className="flex space-x-6 text-xs  bg-red-400 border-gray-200 bg-transparent ">
                   <TabsTrigger
                     value="vendor-details"
-                    className="relative pb-2 text-sm font-medium text-gray-500 data-[state=active]:text-green-700 data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-0 data-[state=active]:after:left-0 data-[state=active]:after:h-0.5 data-[state=active]:after:w-full data-[state=active]:after:bg-green-600"
+                    className="relative pb-2 px-0 text-xs font-semibold text-gray-500 data-[state=active]:text-green-700 data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-0 data-[state=active]:after:left-0 data-[state=active]:after:h-0.5 data-[state=active]:after:w-full data-[state=active]:after:bg-green-600"
                   >
-                    Vendor Details
+                   <AlignJustify className="w-4 mr-1" /> Vendor Details
                   </TabsTrigger>
                   <TabsTrigger
                     value="notes"
-                    className="relative pb-2 text-sm font-medium text-gray-500 data-[state=active]:text-green-700 data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-0 data-[state=active]:after:left-0 data-[state=active]:after:h-0.5 data-[state=active]:after:w-full data-[state=active]:after:bg-green-600"
+                    className="relative pb-2 text-xs font-semibold text-gray-500 data-[state=active]:text-green-700 data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-0 data-[state=active]:after:left-0 data-[state=active]:after:h-0.5 data-[state=active]:after:w-full data-[state=active]:after:bg-green-600"
                   >
-                    Notes
+                    <NotebookPen className="w-4 mr-1" />Notes
                   </TabsTrigger>
                   <TabsTrigger
                     value="stock-in"
-                    className="relative pb-2 text-sm font-medium text-gray-500 data-[state=active]:text-green-700 data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-0 data-[state=active]:after:left-0 data-[state=active]:after:h-0.5 data-[state=active]:after:w-full data-[state=active]:after:bg-green-600"
+                    className="relative pb-2 text-xs font-semibold text-gray-500 data-[state=active]:text-green-700 data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-0 data-[state=active]:after:left-0 data-[state=active]:after:h-0.5 data-[state=active]:after:w-full data-[state=active]:after:bg-green-600"
                   >
-                    Stock In
+                  <BriefcaseBusiness className="w-4 mr-1"  />  Stock In
                   </TabsTrigger>
                 </TabsList>
                 <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
@@ -299,7 +304,7 @@ const VendorTabs = () => {
               </div>
 
               <TabsContent value="vendor-details" className="mt-0">
-                <VendorDetails />
+                <StockInDetails />
               </TabsContent>
 
               <TabsContent value="notes" className="mt-0">
@@ -315,8 +320,8 @@ const VendorTabs = () => {
 
               <TabsContent value="stock-in" className="mt-0">
                 <DataTable
-                  columns={stockInColumns}
-                  data={stockInData}
+                  columns={stockAdjustmentColumns}
+                  data={stockAdjustmentData}
                   itemsPerPage={10}
                   selectable={false}
                   // onSelectionChange={handleSelectionChange}
@@ -409,4 +414,4 @@ const VendorTabs = () => {
   );
 };
 
-export default VendorTabs;
+export default StockOutTabs;

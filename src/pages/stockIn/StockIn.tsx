@@ -1,11 +1,11 @@
 import StockTable from "@/components/stockIn/StockIn";
 
-const VendorPage = () => {
+const StockInPage = () => {
   return (
-    <div className="flex-1 space-y-8 p-8">
+    <div className="flex-1 space-y-8 p-4">
       <StockTable />
     </div>
   );
 };
 
-export default VendorPage;
+export default StockInPage;

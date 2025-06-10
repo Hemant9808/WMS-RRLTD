@@ -149,7 +149,7 @@ const DataTable: React.FC<DataTableProps> = ({
   return (
     <div className="w-full">
       
-      <div className="overflow-x-scroll rounded-lg border border-gray-200 bg-white">
+      <div className="overflow-x-scroll xl:overflow-hidden  rounded-lg custom-scrollbar border border-gray-200 bg-white">
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>

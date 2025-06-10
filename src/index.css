@@ -45,11 +45,13 @@
 
 /* in your index.css or a global CSS file */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 9px;
+  height: 9px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #cbd5e0; /* Tailwind gray-400 */
+  background-color: #b4b6b8; /* Tailwind gray-400 */
   border-radius: 9999px;
+
 }
 .custom-scrollbar::-webkit-scrollbar-track {
   background-color: #f7fafc; /* Tailwind gray-100 */

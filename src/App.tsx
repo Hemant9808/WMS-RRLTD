@@ -10,8 +10,10 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Employee from "./pages/Employee/Employee";
 import UnderMaintenance from "./components/ui/notFound";
 import VendorPage from "./pages/vendor/Vendor";
-import StockInPage from "./pages/vendor/Vendor";
 import VendorTabs from "./pages/vendor/VendorTabs";
+import StockInPage from "./pages/stockIn/StockIn";
+import StockInTabs from "./pages/stockIn/StockInTabs";
+import StockOutPage from "./pages/stockOut/StockOut";
 // import ProtectedRoute from './components/auth/ProtectedRoute';
 
 function App() {
@@ -41,7 +43,10 @@ function App() {
           <Route path="vendor" element={<VendorPage />} />
           <Route path="vendorDetails" element={<VendorTabs />} />
           <Route path="stockIn" element={<StockInPage />} />
+          <Route path="stockInDetails" element={<StockInTabs/>} />
           <Route path="notFound" element={<UnderMaintenance />} />
+          <Route path="stockOut" element={<StockOutPage/>} />
+
         </Route>
         <Route path="/" element={<Navigate to={"/auth/login"} />} />
 

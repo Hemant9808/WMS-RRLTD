@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
 import DataTable, { TableColumn, TableRow } from '@/components/dashboard/DataTable';

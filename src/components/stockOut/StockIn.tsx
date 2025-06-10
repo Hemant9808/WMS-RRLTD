@@ -271,14 +271,14 @@ const StockTable = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl md:text-2xl font-semibold text-gray-900">Stock IN</h1>
+          <h1 className="text-xl md:text-2xl font-semibold text-gray-900">Stock Out</h1>
           <p className="text-sm text-gray-500 mt-1">View and manage vendor</p>
         </div>
         <Button 
           className="bg-[#7ba83c] hover:bg-[#6c973a] text-white w-full md:w-auto"
           onClick={() => setShowAddStock(true)}
         >
-          + Add Stock
+          + Add Stock Out
         </Button>
       </div>
 
@@ -331,8 +331,8 @@ const StockTable = () => {
 
 
               {/* Employee Filter */}
-              <div className="flex items-center gap-2  flex-col md:flex-row text-left   border rounded-lg p-1.5 px-3">
-                <span className="text-sm text-gray-500 ">Vendor</span>
+              <div className="flex items-center gap-2  flex-col md:flex-row text-left   border rounded-lg p-1 px-3">
+                <span className="text-sm text-gray-500 ">Product Type</span>
                 <Select value={employeeFilter} onValueChange={setEmployeeFilter}>
                   <SelectTrigger className="w-full md:w-24 h-7 text-sm text-gray-500">
                     <SelectValue placeholder="Employee" />
@@ -346,19 +346,7 @@ const StockTable = () => {
               </div>
 
               {/* Status Filter */}
-              <div className="flex items-center gap-2 border rounded-lg p-1.5 px-3">
-                <span className="text-sm text-gray-500 hidden md:inline">Status</span>
-                <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger className="w-full md:w-24 h-7 text-sm text-gray-500">
-                    <SelectValue placeholder="Status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="All">All</SelectItem>
-                    <SelectItem value="Active">Active</SelectItem>
-                    <SelectItem value="Inactive">Inactive</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              
               <Button
                     variant="outline"
                     size="sm"
@@ -368,6 +356,29 @@ const StockTable = () => {
                     Clear
                     <X className="h-4 w-4 ml-1" />
                   </Button>
+              <div className="relative flex-1 max-w-[15rem]">
+              <Input
+                placeholder="Client"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl- h-9 w-full"
+              />
+              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+
+            </div>
+
+            <div className="relative flex-1 max-w-[15rem]">
+              <Input
+                placeholder="Vendor"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl- h-9 w-full"
+              />
+              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+
+            </div>
+
+
               </div>
 
 

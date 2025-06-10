@@ -1,50 +1,5 @@
-// import React from 'react';
-
-// const VendorDetails = () => {
-//   return (
-//     <div className="space-y-6">
-//       {/* Other Details Section */}
-//       <div>
-//         <h4 className="text-sm font-medium text-gray-700 mb-4">Other Details</h4>
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//           <div className="space-y-4">
-//             <div>
-//               <label className="text-sm text-gray-500">Official Website</label>
-//               <p className="text-sm text-gray-900 mt-1">
-//                 Eg: 12 https://demo-website.biz/account/projects/4094
-//               </p>
-//             </div>
-//             <div>
-//               <label className="text-sm text-gray-500">Address</label>
-//               <p className="text-sm text-gray-900 mt-1">#1234</p>
-//             </div>
-//             <div>
-//               <label className="text-sm text-gray-500">Shipping Address</label>
-//               <p className="text-sm text-gray-900 mt-1">#1234</p>
-//             </div>
-//           </div>
-          
-//           <div className="space-y-4">
-//             <div>
-//               <label className="text-sm text-gray-500">Opening Balance</label>
-//               <p className="text-sm text-gray-900 mt-1">₹ 60000</p>
-//             </div>
-//             <div>
-//               <label className="text-sm text-gray-500">Billing Address</label>
-//               <p className="text-sm text-gray-900 mt-1">#1234</p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default VendorDetails;
 
 
-
-import React from 'react';
 
 const VendorDetails = () => {
   return (
