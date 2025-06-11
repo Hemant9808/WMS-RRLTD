@@ -79,9 +79,8 @@ const AddEmployeeModal = ({ open, onOpenChange }: AddEmployeeModalProps) => {
 
   return (
     <div>
-      {/* <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-md mx-auto max-h-[90vh] overflow-y-auto"> */}
-          <div className="flex overflow-scroll text-gray-500 flex-row items-center justify-between space-y-0 pb-4">
+      
+          <div className="flex overflow-hidden scrollable-hidden-scrollbar text-gray-500 flex-row items-center justify-between space-y-0 pb-4">
             <div className="text-lg font-medium">Add Employee</div>
             <Button
               variant="ghost"
@@ -230,6 +229,7 @@ const AddEmployeeModal = ({ open, onOpenChange }: AddEmployeeModalProps) => {
                   </SelectContent>
                 </Select>
                 <Button
+                onClick={() => setShowQuickSearch(true)}
                   variant="outline"
                   size="sm"
                   className="px-3 border-[#7ba83c] text-[#7ba83c] hover:bg-[#7ba83c] hover:text-white"
@@ -332,8 +332,7 @@ const AddEmployeeModal = ({ open, onOpenChange }: AddEmployeeModalProps) => {
               </Button>
             </div>
           </div>
-        {/* </DialogContent>
-      </Dialog> */}
+        
 
       {/* Sub-modals */}
       <QuickSearchModal

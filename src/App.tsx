@@ -14,6 +14,8 @@ import VendorTabs from "./pages/vendor/VendorTabs";
 import StockInPage from "./pages/stockIn/StockIn";
 import StockInTabs from "./pages/stockIn/StockInTabs";
 import StockOutPage from "./pages/stockOut/StockOut";
+import StockAdjustmentPage from "./pages/stockAdustment/stockAdjustment";
+import StockAdjustmentDetails from "./pages/stockAdustment/stockAdustmentDetails";
 // import ProtectedRoute from './components/auth/ProtectedRoute';
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
           <Route path="stockInDetails" element={<StockInTabs/>} />
           <Route path="notFound" element={<UnderMaintenance />} />
           <Route path="stockOut" element={<StockOutPage/>} />
+          <Route path="StockAdjustment" element={<StockAdjustmentDetails/>} />
+          <Route path="StockAdustmentTable" element={<StockAdjustmentPage/>} />
 
         </Route>
         <Route path="/" element={<Navigate to={"/auth/login"} />} />

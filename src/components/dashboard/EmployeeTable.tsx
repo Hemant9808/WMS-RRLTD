@@ -432,24 +432,22 @@ const EmployeeTable = () => {
         </div>
       </div>
 
-      {/* Modals */}
-      {showAddEmployee && (
-        <div 
-          className={`
-    fixed inset-0 md:inset-auto md:absolute md:rounded-lg
-    md:max-h-[95%] md:top-0 md:right-0 bg-white z-50 shadow-lg p-4
-    w-full md:w-[30rem] md:m-4
-    overflow-y-auto custom-scrollbar
-  `}
-        // className={`fixed inset-0 md:inset-auto md:absolute md:rounded-lg md:max-h-[95%] md:overflow-y-auto md:top-0 md:right-0 bg-white z-50 shadow-lg p-4 w-full md:w-[30rem] md:m-4`}
-        >
-          <AddEmployeeModal
-            open={showAddEmployee}
-            onOpenChange={setShowAddEmployee}
-          />
-        </div>
-      )}
-      
+    
+
+      <CustomDrawer
+        open={showAddEmployee}
+        onOpenChange={setShowAddEmployee}
+        className="w-full inset-y-0 right-2 p-4 md:w-[30rem] h-screen"
+      >
+
+        <AddEmployeeModal
+        open={showAddEmployee}
+        onOpenChange={setShowAddEmployee}
+      />
+
+      </CustomDrawer>
+
+    
       <ImportProductsModal
         open={showImportProducts}
         onOpenChange={setShowImportProducts}
@@ -468,6 +466,7 @@ export default EmployeeTable;
 // Add this hook to your hooks folder (if you don't have it already)
 // hooks/use-media-query.ts
 import { useState, useEffect } from 'react';
+import CustomDrawer from '@/lib/CustomDrawer';
 
 export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false);

@@ -56,3 +56,13 @@
 .custom-scrollbar::-webkit-scrollbar-track {
   background-color: #f7fafc; /* Tailwind gray-100 */
 }
+/* For most elements */
+.scrollable-hidden-scrollbar {
+  overflow-y : auto;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.scrollable-hidden-scrollbar::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
+}

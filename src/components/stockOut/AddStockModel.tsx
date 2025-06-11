@@ -8,7 +8,7 @@ import {   Calendar } from 'lucide-react';
 
 import OrderDetailsStockOut from './OrderDetailsStockOut';
 
-
+import { cn } from "@/lib/utils";
 interface AddStockModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -47,7 +47,14 @@ const AddStockModal = ({ open, onOpenChange }: AddStockModalProps) => {
   const handleCancel = () => {
     onOpenChange(false);
   };
-
+  const statusOptions = [
+    { label: "Pending", value: "pending", color: "bg-amber-500" },
+    { label: "On Hold", value: "on-hold", color: "bg-cyan-500" },
+    { label: "Failed", value: "failed", color: "bg-neutral-500" },
+    { label: "Processing", value: "processing", color: "bg-blue-500" },
+    { label: "Completed", value: "completed", color: "bg-green-500" },
+    { label: "Canceled", value: "canceled", color: "bg-red-500" },
+  ];
 
   
 
@@ -151,7 +158,7 @@ const AddStockModal = ({ open, onOpenChange }: AddStockModalProps) => {
                   </div>
                 </div>
 
-                <div className="space-y-2">
+                {/* <div className="space-y-2">
                   <Label htmlFor="vendorDetail" className="text-xs font-medium">Delivery Status</Label>
                   <div className="flex gap-2">
                     <Select value={formData.vendorDetail} onValueChange={(value) => setFormData({ ...formData, vendorDetail: value })}>
@@ -165,7 +172,45 @@ const AddStockModal = ({ open, onOpenChange }: AddStockModalProps) => {
                     </Select>
                    
                   </div>
-                </div>
+                </div> */}
+
+
+                 <div className="space-y-2">
+                              <Label htmlFor="deliveryStatus" className="text-xs font-medium">
+                                Delivery Status
+                              </Label>
+                              <Select
+                                value={formData.deliveryStatus}
+                                onValueChange={(value) =>
+                                  setFormData({ ...formData, deliveryStatus: value })
+                                }
+                              >
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Select status" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {statusOptions.map((status) => (
+                                    <SelectItem
+                                      key={status.value}
+                                      value={status.value}
+                                      className={cn(
+                                        "flex items-center gap-2 px-3 py-2 cursor-pointer rounded-md transition-colors",
+                                        formData.deliveryStatus === status.value
+                                          ? "bg-emerald-50 border-l-2 border-green-600"
+                                          : ""
+                                      )}
+                                    >
+                                      <div className="flex gap-3 items-center">
+                                        <div
+                                          className={`w-2 h-2 rounded-full ${status.color}`}
+                                        ></div>
+                                        <div className="text-sm">{status.label}</div>
+                                      </div>
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
 
                 {/* Expected Delivery Date */}
                 <div className="space-y-2">

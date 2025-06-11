@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { X, Search } from 'lucide-react';
-
+import { Search } from 'lucide-react';
+import quickSearch from '@/assets/quickSearch.png'; // Adjust the path as necessary
 interface QuickSearchModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -15,17 +15,10 @@ const QuickSearchModal = ({ open, onOpenChange, onImportClick }: QuickSearchModa
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg mx-auto">
+      <DialogContent className="max-w-2xl mx-auto">
         <DialogHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
           <DialogTitle className="text-lg font-medium">Quick Search</DialogTitle>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => onOpenChange(false)}
-            className="h-6 w-6 p-0"
-          >
-            <X className="h-4 w-4" />
-          </Button>
+          
         </DialogHeader>
 
         <div className="space-y-6">
@@ -64,14 +57,8 @@ const QuickSearchModal = ({ open, onOpenChange, onImportClick }: QuickSearchModa
           </div>
 
           {/* Illustration */}
-          <div className="flex flex-col items-center justify-center py-8">
-            <div className="w-32 h-32 bg-blue-50 rounded-lg flex items-center justify-center mb-4 relative">
-              <div className="w-16 h-12 bg-blue-500 rounded border-2 border-white relative">
-                <div className="absolute -right-2 -top-2 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-white text-xs">👤</span>
-                </div>
-              </div>
-            </div>
+          <div className="flex flex-col items-center justify-center ">
+            <img className='max-h-[12rem]' src={quickSearch} alt="" />
             <p className="text-sm text-gray-500 text-center max-w-xs">
               Search for existing designations or add new ones
             </p>

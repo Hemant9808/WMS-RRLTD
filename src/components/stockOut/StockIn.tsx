@@ -353,7 +353,7 @@ const StockTable = () => {
                     onClick={clearFilters}
                     className="h-9 px-3 text-sm text-gray-500"
                   >
-                    Clear
+                    Cleargesgs
                     <X className="h-4 w-4 ml-1" />
                   </Button>
               <div className="relative flex-1 max-w-[15rem]">
@@ -416,24 +416,7 @@ const StockTable = () => {
         </div>
       </div>
 
-      {/* Modals */}
-      {showAddEmployee && (
-        <div 
-          className={`
-    fixed inset-0 md:inset-auto md:absolute md:rounded-lg
-    md:max-h-[95%] md:top-0 md:right-0 bg-white z-50 shadow-lg p-4
-    w-full md:w-[30rem] md:m-4
-    overflow-y-auto custom-scrollbar
-  `}
-        // className={`fixed inset-0 md:inset-auto md:absolute md:rounded-lg md:max-h-[95%] md:overflow-y-auto md:top-0 md:right-0 bg-white z-50 shadow-lg p-4 w-full md:w-[30rem] md:m-4`}
-        >
-          <AddVendorModal
-            open={showAddEmployee}
-            onOpenChange={setShowAddEmployee}
-          />
-        </div>
-      )}
-      
+    
       <ImportProductsModal
         open={showImportProducts}
         onOpenChange={setShowImportProducts}
@@ -445,10 +428,24 @@ const StockTable = () => {
 
       />
 
-      <AddStockModal
+      {/* <AddStockModal
+        open={showAddStock}
+        onOpenChange={setShowAddStock}
+      /> */}
+
+      <Drawer direction='right' open={showAddEmployee} onOpenChange={setShowAddEmployee}>
+        <DrawerContent
+      
+          className="w-full md:w-[30rem]">
+          <div className="p-4 h-screen  scrollable-hidden-scrollbar">
+            <AddStockModal
         open={showAddStock}
         onOpenChange={setShowAddStock}
       />
+          </div>
+        </DrawerContent>
+      </Drawer>
+
     </div>
   );
 };
@@ -458,8 +455,9 @@ export default StockTable;
 // Add this hook to your hooks folder (if you don't have it already)
 // hooks/use-media-query.ts
 import { useState, useEffect } from 'react';
-import AddVendorModal from './AddVendorModel';
+// import AddVendorModal from './AddVendorModel';
 import {  useNavigate } from 'react-router-dom';
+import { DrawerContent,Drawer } from '../ui/drawer';
 import AddStockModal from './AddStockModel';
 
 export function useMediaQuery(query: string): boolean {

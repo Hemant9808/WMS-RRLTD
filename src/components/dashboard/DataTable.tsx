@@ -154,7 +154,7 @@ const DataTable: React.FC<DataTableProps> = ({
           <thead className="bg-gray-50">
             <tr>
               {selectable && (
-                <th className="px-6 py-3 text-left w-12">
+                <th className="px-3 py-3 text-left w-12">
                   <Checkbox
                     checked={isAllSelected}
                     onCheckedChange={toggleAllSelection}
@@ -165,13 +165,13 @@ const DataTable: React.FC<DataTableProps> = ({
               {columns.map((column) => (
                 <th
                   key={column.key}
-                  className={`px-6 py-3 text-left text-[0.8rem] font-medium uppercase tracking-wider text-gray-500 ${
+                  className={`px-3 py-3 text-left text-[0.8rem] font-medium  tracking-wider text-gray-500 ${
                     column.sortable ? 'cursor-pointer hover:bg-gray-100' : ''
                   }`}
                   style={{ width: column.width }}
                   onClick={() => column.sortable && handleSort(column.key)}
                 >
-                  <div className="flex items-center gap-1">
+                  <div className="flex w-full items-center gap-1">
                     {column.label}
                     {column.sortable && sortConfig?.key === column.key && (
                       <span className="text-gray-400">

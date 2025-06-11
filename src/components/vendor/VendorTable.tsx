@@ -220,7 +220,7 @@ import DataTable, { TableColumn, TableRow } from '../dashboard/DataTable';
 import ImportProductsModal from '../employee/ImportProductModel';
 import RoleConfirmModal from '../employee/RoleConfirmModel';
 
-const EmployeeTable = () => {
+const VendorTable = () => {
  const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [employeeFilter, setEmployeeFilter] = useState('All');
@@ -408,22 +408,23 @@ const EmployeeTable = () => {
       </div>
 
       {/* Modals */}
-      {showAddEmployee && (
-        <div 
-          className={`
-    fixed inset-0 md:inset-auto md:absolute md:rounded-lg
-    md:max-h-[95%] md:top-0 md:right-0 bg-white z-50 shadow-lg p-4
-    w-full md:w-[30rem] md:m-4
-    overflow-y-auto custom-scrollbar
-  `}
-        // className={`fixed inset-0 md:inset-auto md:absolute md:rounded-lg md:max-h-[95%] md:overflow-y-auto md:top-0 md:right-0 bg-white z-50 shadow-lg p-4 w-full md:w-[30rem] md:m-4`}
-        >
-          <AddVendorModal
-            open={showAddEmployee}
-            onOpenChange={setShowAddEmployee}
-          />
-        </div>
-      )}
+      
+
+
+      <CustomDrawer
+              open={showAddEmployee}
+              onOpenChange={setShowAddEmployee}
+              className="w-full inset-y-2 right-2 p-4 md:w-[30rem] h-screen"
+            >
+      
+              <AddVendorModal
+               open={showAddEmployee}
+              onOpenChange={setShowAddEmployee}
+            />
+      
+            </CustomDrawer>
+
+
       
       <ImportProductsModal
         open={showImportProducts}
@@ -438,13 +439,14 @@ const EmployeeTable = () => {
   );
 };
 
-export default EmployeeTable;
+export default VendorTable;
 
 // Add this hook to your hooks folder (if you don't have it already)
 // hooks/use-media-query.ts
 import { useState, useEffect } from 'react';
 import AddVendorModal from './AddVendorModel';
 import { useNavigate } from 'react-router-dom';
+import CustomDrawer from '@/lib/CustomDrawer';
 
 export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false);
