@@ -17,6 +17,7 @@ import StockOutPage from "./pages/stockOut/StockOut";
 import StockAdjustmentPage from "./pages/stockAdustment/stockAdjustment";
 import StockAdjustmentDetails from "./pages/stockAdustment/stockAdustmentDetails";
 import ReportMonitoring from "./pages/reportMonitoring/ReportMonitoring";
+import EmployeeDetails from "./components/employee/employeeDetails";
 // import ProtectedRoute from './components/auth/ProtectedRoute';
 
 function App() {
@@ -52,6 +53,8 @@ function App() {
           <Route path="StockAdjustment" element={<StockAdjustmentDetails/>} />
           <Route path="StockAdustmentTable" element={<StockAdjustmentPage/>} />
           <Route path="reportMonitoring" element={<ReportMonitoring/>} />
+          <Route path="employeeDetails" element={<EmployeeDetails/>} />
+
 
         </Route>
         <Route path="/" element={<Navigate to={"/auth/login"} />} />

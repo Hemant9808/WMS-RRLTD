@@ -233,7 +233,7 @@ const EmployeeTable = () => {
   const [showImportProducts, setShowImportProducts] = useState(false);
   const [roleConfirmModalOpen, setRoleConfirmModalOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
-  
+  const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 768px)');
   // const isTablet = useMediaQuery('(max-width: 1024px)');
  console.log(selectedRows,actionFilter);
@@ -427,6 +427,8 @@ const EmployeeTable = () => {
             itemsPerPage={10}
             selectable={true}
             onSelectionChange={handleSelectionChange}
+            onRowClick={() => navigate(`/dashboard/employeeDetails` )}
+            
             // responsive={isMobile || isTablet}
           />
         </div>
@@ -467,6 +469,7 @@ export default EmployeeTable;
 // hooks/use-media-query.ts
 import { useState, useEffect } from 'react';
 import CustomDrawer from '@/lib/CustomDrawer';
+import { useNavigate } from 'react-router-dom';
 
 export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false);

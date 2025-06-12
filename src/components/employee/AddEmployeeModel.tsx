@@ -5,11 +5,10 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Upload, X, Edit } from 'lucide-react';
-import QuickSearchModal from './QuickSearchModel';
-import AddDesignationModal from './AddDesignationModel';
 import ImportProductsModal from './ImportProductModel';
 import RoleConfirmModal from './RoleConfirmModel';
 import upload from '@/assets/upload.png';
+import AddItemModal from '../ui/AddItemModel';
 // import QuickSearchModal from './QuickSearchModal';
 // import AddDesignationModal from './AddDesignationModal';
 // import ImportProductsModal from './ImportProductsModal';
@@ -334,20 +333,28 @@ const AddEmployeeModal = ({ open, onOpenChange }: AddEmployeeModalProps) => {
           </div>
         
 
-      {/* Sub-modals */}
-      <QuickSearchModal
-        open={showQuickSearch}
-        onOpenChange={setShowQuickSearch}
-        onImportClick={() => {
-          setShowQuickSearch(false);
-          setShowImportProducts(true);
-        }}
-      />
+    
 
-      <AddDesignationModal
+      <AddItemModal
+  open={showQuickSearch}
+  onOpenChange={setShowQuickSearch}
+  title="Add Department"
+  placeholder="e.g. manager"
+  label="Add Department"
+/>
+
+      {/* <AddDesignationModal
         open={showAddDesignation}
         onOpenChange={setShowAddDesignation}
-      />
+      /> */}
+
+      <AddItemModal
+  open={showAddDesignation}
+  onOpenChange={setShowAddDesignation}
+  title="Add Designation"
+  placeholder="e.g. Supervisor"
+  label="Add Designation"
+/>
 
       <ImportProductsModal
         open={showImportProducts}

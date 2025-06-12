@@ -12,8 +12,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
-// import VendorDetails from "@/components/vendor/vendorDetails";
-// import VendorNotes from "@/components/vendor/vendorNotes";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -107,7 +105,7 @@ export const noteColumns: TableColumn[] = [
   },
 ]
 const ReportMonitoring = () => {
-  const [activeTab, setActiveTab] = useState("vendor-details");
+  const [activeTab, setActiveTab] = useState("stock-in");
 
   const [open, setOpen] = useState(false)
     const [title, setTitle] = useState("")

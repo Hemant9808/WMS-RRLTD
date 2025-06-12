@@ -14,6 +14,8 @@ import { Calendar, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import barcode from "@/assets/barcode.png";
+import AddItemModal from "../ui/AddItemModel";
+// import AddItemModal from "../ui/AddItemModel";
 
 interface AddStockModalProps {
   open: boolean;
@@ -44,6 +46,14 @@ const AddStockModal = ({ open, onOpenChange }: AddStockModalProps) => {
     auditedBy: "",
     receivedBy: "",
   });
+
+  const [showAddItemModal, setShowAddItemModal] = useState(false);
+const [addItemModalTitle, setAddItemModalTitle] = useState("");
+const openAddItemModal = (title: string) => {
+  setAddItemModalTitle(title);
+  setShowAddItemModal(true);
+};
+
 
   const handleSubmit = () => {
     console.log("Form submitted:", formData);
@@ -222,6 +232,7 @@ const AddStockModal = ({ open, onOpenChange }: AddStockModalProps) => {
                       variant="outline"
                       size="sm"
                       className="px-3 border-primary text-primary hover:bg-primary hover:text-white"
+                       onClick={() => openAddItemModal("Add Category")}
                     >
                       Add
                     </Button>
@@ -297,6 +308,7 @@ const AddStockModal = ({ open, onOpenChange }: AddStockModalProps) => {
                       variant="outline"
                       size="sm"
                       className="px-3 border-primary text-primary hover:bg-primary hover:text-white"
+                    onClick={() => openAddItemModal("Add Unit Type")}
                     >
                       Add
                     </Button>
@@ -326,6 +338,7 @@ const AddStockModal = ({ open, onOpenChange }: AddStockModalProps) => {
                       variant="outline"
                       size="sm"
                       className="px-3 border-primary text-primary hover:bg-primary hover:text-white"
+                    onClick={() => openAddItemModal("Add Weight Type")}
                     >
                       Add
                     </Button>
@@ -391,6 +404,7 @@ const AddStockModal = ({ open, onOpenChange }: AddStockModalProps) => {
                   variant="outline"
                   size="sm"
                   className="px-3 border-primary text-primary hover:bg-primary hover:text-white"
+                onClick={() => openAddItemModal("Add Vendor")}
                 >
                   Add
                 </Button>
@@ -572,6 +586,26 @@ const AddStockModal = ({ open, onOpenChange }: AddStockModalProps) => {
           </div>
         </div>
       </div>
+
+      <AddItemModal
+  open={showAddItemModal}
+  onOpenChange={setShowAddItemModal}
+  title={addItemModalTitle}
+  placeholder={`e.g. ${addItemModalTitle.split(" ")[1] || ""}`}
+  label={addItemModalTitle}
+/>
+
+
+{/* 
+    
+
+<AddItemModal
+  open={showAddDesignation}
+  onOpenChange={setShowAddDesignation}
+  title="Add Designation"
+  placeholder="e.g. Supervisor"
+  label="Add Designation"
+/> */}
 
       {/* Action Buttons */}
       <div className="flex gap-3 items-start pt-6 border-t">
