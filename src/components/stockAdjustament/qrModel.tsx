@@ -1,32 +1,3 @@
-
-// import Qr1 from '../../assets/qr1.png';
-// const QRScannerModal = ({ onClose }: { onClose: () => void }) => {
-//   return (
-//     <div className="fixed  inset-0 z-50 bg-black bg-opacity-60 flex items-center justify-center">
-//       <div className="relative rounded-lg shadow-xl p-2 w-[400px] h-[280px] flex items-center justify-center ">
-//         <div className="absolute inset-0 rounded-lg border-4 pointer-events-none" />
-//         <img
-//         src={Qr1}
-//           alt="Scan Background"
-//           className="absolute inset-0 w-full h-full object-cover rounded-lg"
-//         />
-     
-
-//         <button
-//           className="absolute top-2 right-2  rounded-full p-1 shadow"
-//           onClick={onClose}
-//         >
-//           ✕
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default QRScannerModal;
-
-
-
 import {
   Dialog,
   DialogContent,

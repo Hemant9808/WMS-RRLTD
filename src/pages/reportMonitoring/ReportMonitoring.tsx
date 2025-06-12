@@ -21,78 +21,23 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 
-// import DataTable, { TableColumn, TableRow } from '../../components/dashboard/DataTable';
-
-import DataTable, {
-  TableColumn,
-  TableRow,
-} from "@/components/ui/DataTableComp";
-import StockInDetails from "@/components/stockIn/StockInDetails";
 
 
 
+import ReportStockTable from "@/components/report/reportStockIn";
+import  { TableColumn, TableRow } from "@/components/dashboard/DataTable";
+import ReportStockOut from "@/components/report/reportStockIOut";
+import ReportStockLow from "@/components/report/ReportLowStock";
+import ReportStockAdjustment from "@/components/report/ReportAdjustment";
 
 
-const stockAdjustmentColumns: TableColumn[] = [
-  { key: "dateTime", label: "Date & Time", sortable: true },
-  { key: "adjustedBy", label: "Adjusted By", sortable: true },
-  { key: "previousStock", label: "Previous Stock", sortable: true },
-  { key: "adjustmentQty", label: "Adjustment Qtys", sortable: true },
-  { key: "newStock", label: "New Stock", sortable: true },
-  { key: "reason", label: "Reason", sortable: true },
-  { key: "note", label: "Note", sortable: true },
-  {
-    key: "action",
-    label: "Action",
-    render: (row: any) => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
-            <MoreVertical className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent
-          align="end"
-          className="bg-white shadow-lg p-2 cursor-pointer"
-        >
-          <DropdownMenuItem onClick={() => console.log("view", row)}>
-            View
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => console.log("edit", row)}>
-            Edit
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => console.log("delete", row)}>
-            Delete
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
-  },
-];
 
 
-const stockAdjustmentData: TableRow[] = [
-  {
-    id: 1,
-    dateTime: "2/1/2025, 13:00pm",
-    adjustedBy: "--",
-    previousStock: "--",
-    adjustmentQty: "--",
-    newStock: "--",
-    reason: "--",
-    note: "--",
-  },
-  {
-    id: 2,
-    dateTime: "2/1/2025, 13:00pm",
-    adjustedBy: "--",
-    previousStock: "--",
-    adjustmentQty: "--",
-    newStock: "--",
-    reason: "--",
-    note: "--",
-  },
-];
+
+
+
+
+
 
 
 
@@ -161,7 +106,7 @@ export const noteColumns: TableColumn[] = [
     ),
   },
 ]
-const StockInTabs = () => {
+const ReportMonitoring = () => {
   const [activeTab, setActiveTab] = useState("vendor-details");
 
   const [open, setOpen] = useState(false)
@@ -174,23 +119,14 @@ const StockInTabs = () => {
     }
 
   return (
-    <div className="flex-1 p-4 space-y-4  bg-white overflow-hidden mt-5 rounded-xl lg:h-[95%]">
+    <div className="flex-1 p-4 space-y-4  bg-white mt-5 scrollable-hidden-scrollbar  rounded-xl lg:h-[95%]">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-600">Stock In</h1>
-          <p className="text-xs font-semibold text-gray-500 mt-1">View Order and  Vendor Details</p>
+          <h1 className="text-2xl font-semibold text-gray-600">Report & Monitoring </h1>
+          <p className="text-xs font-semibold text-gray-500 mt-1">View Sotck IN and Out Report Details</p>
         </div>
-       {activeTab=="notes" && <Button
-        onClick={()=>setOpen(true)}
-         className="bg-[#7ba83c] hover:bg-[#6c973a] text-white">
-          +{" "} Add Notes
-        </Button>}
-         {activeTab  == "stock-in" &&<Button
-        onClick={()=>setOpen(true)}
-         className="bg-[#7ba83c] hover:bg-[#6c973a] text-white">
-             +{" "} Add Stock
-        </Button>}
+       
       </div>
 
       
@@ -201,32 +137,38 @@ const StockInTabs = () => {
       
 
           {/* Right Side - Tabs */}
-          <div className="flex-1">
+          <div className="flex-1 ">
             <Tabs
               value={activeTab}
               onValueChange={setActiveTab}
               className="w-full "
             >
-              <div className="flex bg--400 border-b mb-5 items-center justify-between ">
+              <div className="flex bg--400 border-b mb-4  items-center justify-between ">
                
                 <TabsList className="flex space-x-6 text-xs  bg-red-400 border-gray-200 bg-transparent ">
                   <TabsTrigger
-                    value="vendor-details"
+                    value="stock-in"
                     className="relative pb-2 px-0 text-xs font-semibold text-gray-500 data-[state=active]:text-green-700 data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-0 data-[state=active]:after:left-0 data-[state=active]:after:h-0.5 data-[state=active]:after:w-full data-[state=active]:after:bg-green-600"
                   >
-                   <AlignJustify className="w-4 mr-1" /> Vendor Details
+                   <AlignJustify className="w-4 mr-1" /> Stock IN 
                   </TabsTrigger>
                   <TabsTrigger
-                    value="notes"
+                    value="stock-out"
                     className="relative pb-2 text-xs font-semibold text-gray-500 data-[state=active]:text-green-700 data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-0 data-[state=active]:after:left-0 data-[state=active]:after:h-0.5 data-[state=active]:after:w-full data-[state=active]:after:bg-green-600"
                   >
-                    <NotebookPen className="w-4 mr-1" />Notes
+                    <NotebookPen className="w-4 mr-1" />Stock Out
                   </TabsTrigger>
                   <TabsTrigger
-                    value="stock-in"
+                    value="low-stock"
                     className="relative pb-2 text-xs font-semibold text-gray-500 data-[state=active]:text-green-700 data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-0 data-[state=active]:after:left-0 data-[state=active]:after:h-0.5 data-[state=active]:after:w-full data-[state=active]:after:bg-green-600"
                   >
-                  <BriefcaseBusiness className="w-4 mr-1"  />  Stock In
+                  <BriefcaseBusiness className="w-4 mr-1"  /> Low Stock Item
+                  </TabsTrigger>
+                   <TabsTrigger
+                    value="stock-adjustment"
+                    className="relative pb-2 text-xs font-semibold text-gray-500 data-[state=active]:text-green-700 data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-0 data-[state=active]:after:left-0 data-[state=active]:after:h-0.5 data-[state=active]:after:w-full data-[state=active]:after:bg-green-600"
+                  >
+                  <BriefcaseBusiness className="w-4 mr-1"  /> Stock Adjustment
                   </TabsTrigger>
                 </TabsList>
                 <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
@@ -234,30 +176,24 @@ const StockInTabs = () => {
                 </Button>
               </div>
 
-              <TabsContent value="vendor-details" className="mt-0">
-                <StockInDetails />
-              </TabsContent>
-
-              <TabsContent value="notes" className="mt-0">
-                {/* <VendorNotes /> */}
-                <DataTable
-                  columns={noteColumns}
-                  data={noteData}
-                  itemsPerPage={10}
-                  selectable={false}
-                  // onSelectionChange={handleSelectionChange}
-                />
-              </TabsContent>
-
               <TabsContent value="stock-in" className="mt-0">
-                <DataTable
-                  columns={stockAdjustmentColumns}
-                  data={stockAdjustmentData}
-                  itemsPerPage={10}
-                  selectable={false}
-                  // onSelectionChange={handleSelectionChange}
-                />
-                {/* <VendorStockIn /> */}
+               
+                <ReportStockTable />
+              </TabsContent>
+
+              <TabsContent value="stock-out" className="mt-0">
+              
+                <ReportStockOut/>
+               
+              </TabsContent>
+
+              <TabsContent value="low-stock" className="mt-0">
+                <ReportStockLow/>
+               
+              </TabsContent>
+              <TabsContent value="stock-adjustment" className="mt-0">
+                <ReportStockAdjustment/>
+              
               </TabsContent>
             </Tabs>
           </div>
@@ -345,4 +281,4 @@ const StockInTabs = () => {
   );
 };
 
-export default StockInTabs;
+export default ReportMonitoring;

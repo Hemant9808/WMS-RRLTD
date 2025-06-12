@@ -27,7 +27,7 @@ const mainNavItems = [
   { icon: LogIn, label: 'Stock In', href: '/dashboard/stockIn' },
   { icon: LogOut, label: 'Stock Out', href: '/dashboard/stockOut' },
   { icon: ClipboardEdit, label: 'Stock Adjustment', href: '/dashboard/StockAdustmentTable' },
-
+  { icon: ClipboardEdit, label: 'Report & Monitoring', href: '/dashboard/reportMonitoring' },
 
 
 ];

@@ -187,7 +187,7 @@ const DataTable: React.FC<DataTableProps> = ({
             {paginatedData.map((row) => (
               <tr key={row.id} className="hover:bg-gray-50">
                 {selectable && (
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-3 py-4 whitespace-nowrap">
                     <Checkbox
                       checked={selectedRows.includes(row.id)}
                       onCheckedChange={() => toggleRowSelection(row.id)}
