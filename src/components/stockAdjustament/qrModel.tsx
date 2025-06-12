@@ -33,7 +33,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import Qr1 from "../../assets/qr1.png"
+import Qr1 from "../../assets/Qr1.png"
 
 const QRScannerDialog = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   return (
